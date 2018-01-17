@@ -10,7 +10,8 @@ import Foundation
 
 public protocol HUDFactory {
     func makeHUD() -> UIViewController
-    func update(factory: HUDFactory)
+    func update(factory: HUDFactory)->Bool
+    func equal(to factory: HUDFactory)->Bool
 }
 
 public enum HUDState {
@@ -40,14 +41,15 @@ public class UIProgressHUD {
                                dismissAfter after: TimeInterval = .infinity,
                                completed:(()->())? = nil) {
         DispatchQueue.main.async {
-            guard let top = topest else {
-                return
+            guard let top = topest else { return }
+            if let current = currentFactory {
+                guard !current.equal(to: factory) else {return}
             }
             
-            func began<T: HUDFactory>(anew: HUDContainerViewController, atop: UIViewController, afactory: T, aafter: TimeInterval, acompleted:(()->())?) {
-                willPresent(new: anew, top: atop)
-                currentFactory = afactory
-                willDismiss(after: aafter, completed: acompleted)
+            func began<T: HUDFactory>(new1: HUDContainerViewController, top1: UIViewController, factory1: T, after1: TimeInterval, completed1:(()->())?) {
+                willPresent(new: new1, top: top1)
+                currentFactory = factory1
+                willDismiss(after: after1, completed: completed1)
             }
             
             switch state {
@@ -55,11 +57,13 @@ public class UIProgressHUD {
                 // cancel and present
                 let container = HUDContainerViewController(hud: factory.makeHUD())
                 willCancel {
-                    began(anew: container,
-                          atop: top,
-                          afactory: factory,
-                          aafter: after,
-                          acompleted: completed)
+                    began(new1: container,
+                          top1: top,
+                          factory1: factory,
+                          after1: after) {
+                            hudContainer = nil
+                            currentFactory = nil
+                    }
                 }
                 
             case .cancelling:
@@ -68,30 +72,42 @@ public class UIProgressHUD {
                 // cancel and present
                 let container = HUDContainerViewController(hud: factory.makeHUD())
                 willCancel {
-                    began(anew: container,
-                          atop: top,
-                          afactory: factory,
-                          aafter: after,
-                          acompleted: completed)
+                    began(new1: container,
+                          top1: top,
+                          factory1: factory,
+                          after1: after) {
+                            hudContainer = nil
+                            currentFactory = nil
+                    }
                 }
             case .dismissed:
                 // present
                 let container = HUDContainerViewController(hud: factory.makeHUD())
-                began(anew: container,
-                      atop: top,
-                      afactory: factory,
-                      aafter: after,
-                      acompleted: completed)
+                began(new1: container,
+                      top1: top,
+                      factory1: factory,
+                      after1: after) {
+                        hudContainer = nil
+                        currentFactory = nil
+                }
             }
         }
     }
     
     public static func update<T: HUDFactory>(_ factory: T) {
-        currentFactory?.update(factory: factory)
+        if currentFactory?.update(factory: factory) ?? false {
+            currentFactory = factory
+        }
     }
     
     public static func dismiss(after: TimeInterval = 0.0, completed:(()->())? = nil) {
-        willDismiss(after: after, completed: completed)
+        if hudContainer != nil {
+            willDismiss(after: after) {
+                hudContainer = nil
+                currentFactory = nil
+            }
+        }
+        
     }
 }
 
@@ -165,14 +181,14 @@ class HUDContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.isUserInteractionEnabled = false
         addChildViewController(hud)
         view.addSubview(hud.view)
         hidden()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        viewDidAppear(animated)
+        super.viewDidAppear(animated)
         weak var sf = self
         UIView.animate(withDuration: 0.2, animations: {
             sf?.show()

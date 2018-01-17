@@ -13,6 +13,7 @@
 		2CAA1633200F201D00A6F0E6 /* UIProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */; };
 		2CAA1635200F50AA00A6F0E6 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA1634200F50AA00A6F0E6 /* HUD.swift */; };
 		2CAA1637200F549300A6F0E6 /* HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CAA1636200F549300A6F0E6 /* HUD.storyboard */; };
+		2CDFA41B200F7782002F37CA /* HUD.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CDFA41A200F7782002F37CA /* HUD.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProgressHUD.swift; sourceTree = "<group>"; };
 		2CAA1634200F50AA00A6F0E6 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 		2CAA1636200F549300A6F0E6 /* HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HUD.storyboard; sourceTree = "<group>"; };
+		2CDFA41A200F7782002F37CA /* HUD.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = HUD.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				2CAA1634200F50AA00A6F0E6 /* HUD.swift */,
+				2CDFA41A200F7782002F37CA /* HUD.xcassets */,
 				2CAA1636200F549300A6F0E6 /* HUD.storyboard */,
 				2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */,
 				2C2D9F26200E408F004A3A78 /* UIProgressHUD.h */,
@@ -190,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2CAA1637200F549300A6F0E6 /* HUD.storyboard in Resources */,
+				2CDFA41B200F7782002F37CA /* HUD.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
