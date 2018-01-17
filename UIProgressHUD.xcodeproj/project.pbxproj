@@ -10,6 +10,9 @@
 		2C2D9F2D200E408F004A3A78 /* UIProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2D9F23200E408F004A3A78 /* UIProgressHUD.framework */; };
 		2C2D9F32200E408F004A3A78 /* UIProgressHUDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C2D9F31200E408F004A3A78 /* UIProgressHUDTests.swift */; };
 		2C2D9F34200E408F004A3A78 /* UIProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 2C2D9F26200E408F004A3A78 /* UIProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CAA1633200F201D00A6F0E6 /* UIProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */; };
+		2CAA1635200F50AA00A6F0E6 /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CAA1634200F50AA00A6F0E6 /* HUD.swift */; };
+		2CAA1637200F549300A6F0E6 /* HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CAA1636200F549300A6F0E6 /* HUD.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +32,9 @@
 		2C2D9F2C200E408F004A3A78 /* UIProgressHUDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIProgressHUDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C2D9F31200E408F004A3A78 /* UIProgressHUDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProgressHUDTests.swift; sourceTree = "<group>"; };
 		2C2D9F33200E408F004A3A78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIProgressHUD.swift; sourceTree = "<group>"; };
+		2CAA1634200F50AA00A6F0E6 /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
+		2CAA1636200F549300A6F0E6 /* HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HUD.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,9 @@
 		2C2D9F25200E408F004A3A78 /* UIProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
+				2CAA1634200F50AA00A6F0E6 /* HUD.swift */,
+				2CAA1636200F549300A6F0E6 /* HUD.storyboard */,
+				2CAA1632200F201D00A6F0E6 /* UIProgressHUD.swift */,
 				2C2D9F26200E408F004A3A78 /* UIProgressHUD.h */,
 				2C2D9F27200E408F004A3A78 /* Info.plist */,
 			);
@@ -148,6 +157,7 @@
 				TargetAttributes = {
 					2C2D9F22200E408F004A3A78 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					2C2D9F2B200E408F004A3A78 = {
@@ -179,6 +189,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAA1637200F549300A6F0E6 /* HUD.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +207,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CAA1633200F201D00A6F0E6 /* UIProgressHUD.swift in Sources */,
+				2CAA1635200F50AA00A6F0E6 /* HUD.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -321,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -334,6 +347,7 @@
 		2C2D9F38200E408F004A3A78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -347,6 +361,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.Emiaostein.UIProgressHUD;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -355,6 +370,7 @@
 		2C2D9F39200E408F004A3A78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -376,6 +392,7 @@
 		2C2D9F3B200E408F004A3A78 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NS9C5985G;
 				INFOPLIST_FILE = UIProgressHUDTests/Info.plist;
@@ -390,6 +407,7 @@
 		2C2D9F3C200E408F004A3A78 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2NS9C5985G;
 				INFOPLIST_FILE = UIProgressHUDTests/Info.plist;
