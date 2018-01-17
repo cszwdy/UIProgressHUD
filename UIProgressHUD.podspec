@@ -7,12 +7,12 @@ Pod::Spec.new do |s|
   s.summary  = 'An extensible and elegent progress HUD for iOS.'
   s.homepage = 'https://github.com/cszwdy/UIProgressHUD'
   s.authors   = { 'Emiaostein' => 'cszwdy@gmail.com'}
-  s.source   = { :git => 'https://cszwdy@github.com/cszwdy/ProgressHUD.git', :tag => s.version.to_s }
+  s.source   = { :git => 'https://github.com/cszwdy/UIProgressHUD.git', :tag => s.version.to_s }
 
   s.description = 'UIProgressHUD is elegent, it provides Apple style HUD in default. UIProgressHUD is also extensible, you can extend your HUD easily. It may be the best HUD for iOS.'
 
-  s.source_files = 'ProgressHUD/**/*.{h,swift}'
+  s.source_files = 'UIProgressHUD/**/*.{h,swift}'
   # s.framework    = 'QuartzCore'
-  s.resources    = 'ProgressHUD/**/*.{storyboard,xcassets}'
+  s.resources    = 'UIProgressHUD/**/*.{storyboard,xcassets}'
   s.requires_arc = true
 end
