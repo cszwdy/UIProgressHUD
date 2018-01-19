@@ -41,8 +41,8 @@ class ViewController: UIViewController {
          HUD(.progress(0.5), "50%", "You have finished task at 50%.")),
         
         ("Progress",
-         "Progress to 60% and don't dismiss.", .infinity,
-         HUD(.progress(0.6), "60%", "You have finished task at 80%.")),
+         "Progress to 60% and will dismiss after 10 scond.", 10,
+         HUD(.progress(0.6), "60%", "You have finished task at 60%.")),
         ]
     
     let appends: [(String, String)] = [
@@ -55,12 +55,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        UIProgressHUD.isUserInteractionEnabled = false
+        
     }
-
+    @IBAction func action_isUserInteractionEnabled(_ sender: UIButton) {
+        UIProgressHUD.isUserInteractionEnabled = !UIProgressHUD.isUserInteractionEnabled
+        
+        let touchable = UIProgressHUD.isUserInteractionEnabled == false
+        sender.isSelected = touchable
+        
+        if (touchable) {
+            UIProgressHUD.present(HUD(.success, "Enabled", "You can interact during HUD appear."), dismissAfter: 1.5, completed: nil)
+        } else {
+            UIProgressHUD.present(HUD(.failture, "Disabled", "You can't interact during HUD appear."), dismissAfter: 1.5, completed: nil)
+        }
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+}
+
+extension ViewController {
+    
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -103,7 +122,7 @@ extension ViewController: UICollectionViewDelegate {
             case 0:
                 UIProgressHUD.updateTo(HUD(.progress(0.7), "70%", "Downloading..."))
                 UIProgressHUD.updateTo(HUD(.progress(0.8), "80%", "Downloading..."), after: 1.0, completed: nil)
-                UIProgressHUD.updateTo(HUD(.progress(0.9), "90%", "Downloading..."), after: 1.5, completed: nil)
+                UIProgressHUD.updateTo(HUD(.progress(0.9), "90%", "Downloading..."), after: 2.0, completed: nil)
                 UIProgressHUD.updateTo(HUD(.progress(1.0), "100%", "Done! You have finished downloading file."), after: 3.0, completed: nil)
                 
                 UIProgressHUD.dismiss(after: 4.0, completed: nil)

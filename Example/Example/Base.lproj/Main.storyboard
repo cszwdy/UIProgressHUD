@@ -103,6 +103,15 @@
                                 <color key="shadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQd-lz-Cim">
+                                <rect key="frame" x="315" y="38" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="app-userInteractionEnabled-disable"/>
+                                <state key="selected" image="app-userInteractionEnabled-enable"/>
+                                <connections>
+                                    <action selector="action_isUserInteractionEnabled:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dWB-Ri-enb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -119,6 +128,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="app-userInteractionEnabled-disable" width="22" height="22"/>
+        <image name="app-userInteractionEnabled-enable" width="22" height="22"/>
         <image name="bg" width="375" height="812"/>
     </resources>
 </document>

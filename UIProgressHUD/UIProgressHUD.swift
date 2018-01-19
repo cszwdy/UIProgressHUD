@@ -26,6 +26,15 @@ var currentFactory: HUDFactory?
 
 public class UIProgressHUD {
     
+    public static var isUserInteractionEnabled = true {
+        didSet {
+            if let container = hudContainer {
+                container.view.isUserInteractionEnabled = isUserInteractionEnabled
+                container.hud.view.isUserInteractionEnabled = isUserInteractionEnabled
+            }
+        }
+    }
+    
     static var state: HUDState = .dismissed
     static var sentryCount: Int = 0
     static weak var hudContainer: HUDContainerViewController?
@@ -134,6 +143,7 @@ extension UIProgressHUD {
     
     static func willPresent(new: HUDContainerViewController, top: UIViewController) {
         state = .presenting
+        sentryCount += 1
         if let old = hudContainer {
             old.view.removeFromSuperview()
             old.removeFromParentViewController()
@@ -204,7 +214,8 @@ class HUDContainerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.isUserInteractionEnabled = false
+        view.isUserInteractionEnabled = UIProgressHUD.isUserInteractionEnabled
+        hud.view.isUserInteractionEnabled = UIProgressHUD.isUserInteractionEnabled
         addChildViewController(hud)
         view.addSubview(hud.view)
         hidden()
