@@ -65,7 +65,7 @@ public struct HUD: HUDFactory {
         return hud.title == title && hud.subTitle == subTitle && hud.resource == resource
     }
     
-    public func update(factory: HUDFactory) -> Bool {
+    public func updateTo(factory: HUDFactory) -> Bool {
         guard !equal(to: factory) else {
             return false
         }

@@ -41,8 +41,8 @@ class ViewController: UIViewController {
          HUD(.progress(0.5), "50%", "You have finished task at 50%.")),
         
         ("Progress",
-         "Progress to 80% and don't dismiss.", .infinity,
-         HUD(.progress(0.8), "80%", "You have finished task at 80%.")),
+         "Progress to 60% and don't dismiss.", .infinity,
+         HUD(.progress(0.6), "60%", "You have finished task at 80%.")),
         ]
     
     let appends: [(String, String)] = [
@@ -101,8 +101,12 @@ extension ViewController: UICollectionViewDelegate {
             let i = indexPath.item - items.count
             switch i {
             case 0:
-                UIProgressHUD.update(HUD(.progress(1.0), "Done", "You have finished Task."))
-                UIProgressHUD.dismiss(after: 1.0, completed: nil)
+                UIProgressHUD.updateTo(HUD(.progress(0.7), "70%", "Downloading..."))
+                UIProgressHUD.updateTo(HUD(.progress(0.8), "80%", "Downloading..."), after: 1.0, completed: nil)
+                UIProgressHUD.updateTo(HUD(.progress(0.9), "90%", "Downloading..."), after: 1.5, completed: nil)
+                UIProgressHUD.updateTo(HUD(.progress(1.0), "100%", "Done! You have finished downloading file."), after: 3.0, completed: nil)
+                
+                UIProgressHUD.dismiss(after: 4.0, completed: nil)
                 
             case 1:
                 UIProgressHUD.dismiss()

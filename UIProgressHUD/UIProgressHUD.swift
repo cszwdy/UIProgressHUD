@@ -10,7 +10,7 @@ import Foundation
 
 public protocol HUDFactory {
     func makeHUD() -> UIViewController
-    func update(factory: HUDFactory)->Bool
+    func updateTo(factory: HUDFactory)->Bool
     func equal(to factory: HUDFactory)->Bool
 }
 
@@ -94,20 +94,21 @@ public class UIProgressHUD {
         }
     }
     
-    public static func update<T: HUDFactory>(_ factory: T) {
-        if currentFactory?.update(factory: factory) ?? false {
-            currentFactory = factory
+    public static func updateTo<T: HUDFactory>(_ factory: T, after: TimeInterval = 0, completed:((Bool)->())? = nil) {
+        DispatchQueue.main.async {
+            willUpdate(factory: factory, after: after, completed: completed)
         }
     }
     
     public static func dismiss(after: TimeInterval = 0.0, completed:(()->())? = nil) {
-        if hudContainer != nil {
-            willDismiss(after: after) {
-                hudContainer = nil
-                currentFactory = nil
+        DispatchQueue.main.async {
+            if hudContainer != nil {
+                willDismiss(after: after) {
+                    hudContainer = nil
+                    currentFactory = nil
+                }
             }
         }
-        
     }
 }
 
@@ -142,6 +143,28 @@ extension UIProgressHUD {
         top.view.addSubview(new.view)
         
         hudContainer = new
+    }
+    
+    static func willUpdate<T: HUDFactory>(factory: T, after: TimeInterval, completed:((Bool)->())?) {
+        if (after <= 0) {
+            if currentFactory?.updateTo(factory: factory) ?? false {
+                currentFactory = factory
+                completed?(true)
+            } else {
+                completed?(false)
+            }
+        } else {
+            let i = sentryCount
+            DispatchQueue.main.asyncAfter(deadline: .now() + after, execute: {
+                guard i == sentryCount else {return}
+                if currentFactory?.updateTo(factory: factory) ?? false {
+                    currentFactory = factory
+                    completed?(true)
+                } else {
+                    completed?(false)
+                }
+            })
+        }
     }
     
     static func willDismiss(after: TimeInterval, completed:(()->())?) {
